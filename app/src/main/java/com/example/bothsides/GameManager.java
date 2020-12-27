@@ -2,10 +2,8 @@ package com.example.bothsides;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -22,18 +20,17 @@ public class GameManager extends Thread {
 	private final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(128,128);
 	private ArrayList<Integer> timestamps = new ArrayList<>();
 
-
 	@Override
 	public void run() {
 		for (int timestamp : timestamps) {
-			TimerTask logSeconds = new TimerTask() {
+			TimerTask addImageTimerTask = new TimerTask() {
 				@Override
 				public void run() {
 					addImageAndStartAnimation();
 				}
 			};
-			Timer measureSeconds = new Timer();
-			measureSeconds.schedule(logSeconds, timestamp);
+			Timer addImageTimer = new Timer();
+			addImageTimer.schedule(addImageTimerTask, timestamp);
 		}
 	}
 
@@ -47,7 +44,6 @@ public class GameManager extends Thread {
 	}
 
 	private void addImageAndStartAnimation() {
-		Log.d("timer", String.valueOf(imgList.size()));
 		imgList.add(new ImageView(context));
 		final int currentElem = imgList.size() - 1;
 		imgList.get(currentElem).setLayoutParams(params);
