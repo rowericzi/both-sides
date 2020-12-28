@@ -3,11 +3,16 @@ package com.example.bothsides;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListPopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO_1";
+	String[] listItems = {"item 1", "item 2 ", "item 3", "item 4", "item 2137"};
+	int[] listImages = {R.drawable.papryka, R.drawable.papryka, R.drawable.papryka, R.drawable.papryka, R.drawable.papryka};
+	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
 	public static final String EXTRA_MEASURES_1 = "com.example.bothsides.MEASURES_1";
 	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
 	public static final String EXTRA_MEASURES_2 = "com.example.bothsides.MEASURES_2";
@@ -35,5 +40,22 @@ public class MainActivity extends AppCompatActivity {
 		intent.putExtra(EXTRA_MEASURES_2, 10);
 		intent.putExtra(EXTRA_RHYTHM_2, new double[]{0.0, 1.0, 4.0/3, 3.5});
 		startActivity(intent);
+	}
+
+	public void xd(View view) {
+		ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listItems);
+		ImageArrayAdapter adapterr = new ImageArrayAdapter(this, listItems, listImages);
+		final ListPopupWindow popup = new ListPopupWindow(this);
+		popup.setAnchorView(view);
+		popup.setWidth(1000);
+		popup.setAdapter(adapterr);
+		popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				popup.dismiss();
+			}
+		});
+		popup.show();
 	}
 }
