@@ -6,13 +6,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class MainActivity extends AppCompatActivity {
-	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
-	public static final String EXTRA_MEASURES = "com.example.bothsides.MEASURES";
-	public static final String EXTRA_RHYTHM = "com.example.bothsides.RHYTHM";
+	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO_1";
+	public static final String EXTRA_MEASURES_1 = "com.example.bothsides.MEASURES_1";
+	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
+	public static final String EXTRA_MEASURES_2 = "com.example.bothsides.MEASURES_2";
+	public static final String EXTRA_RHYTHM_2 = "com.example.bothsides.RHYTHM_2";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,15 +20,20 @@ public class MainActivity extends AppCompatActivity {
 
 	public void startSingleLevel(View view) {
 		Intent intent = new Intent(this, SingleLevel.class);
+		//using hard-coded values for now
 		intent.putExtra(EXTRA_TEMPO, 90.0);
-		intent.putExtra(EXTRA_MEASURES, 10);
-		double[] rhythm = new double[]{0.0, 0.5, 1.0, 2.0, 3.0, 3.25, 3.5, 3.75};
-		intent.putExtra(EXTRA_RHYTHM, rhythm);
+		intent.putExtra(EXTRA_MEASURES_1, 10);
+		intent.putExtra(EXTRA_RHYTHM_1, new double[]{0.0, 0.5, 1.0, 2.0, 3.0, 3.25, 3.5, 3.75});
 		startActivity(intent);
 	}
 
 	public void startDoubleLevel(View view) {
 		Intent intent = new Intent(this, DoubleLevel.class);
+		intent.putExtra(EXTRA_TEMPO, 90.0);
+		intent.putExtra(EXTRA_MEASURES_1, 10);
+		intent.putExtra(EXTRA_RHYTHM_1, new double[]{0.0, 0.5, 1.0, 2.0, 3.0, 3.25, 3.5, 3.75});
+		intent.putExtra(EXTRA_MEASURES_2, 10);
+		intent.putExtra(EXTRA_RHYTHM_2, new double[]{0.0, 1.0, 4.0/3, 3.5});
 		startActivity(intent);
 	}
 }

@@ -36,11 +36,7 @@ public class GameManager extends Thread {
 		}
 	}
 
-	public GameManager(Context context, RelativeLayout imgHolder) {
-		Intent intent = ((Activity) context).getIntent();
-		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
-		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 10);
-		double[] rhythm = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM);
+	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int measures, double[] rhythm) {
 		this.context = context;
 		this.imgHolder = imgHolder;
 		for (int i = 0; i < measures; i++){
