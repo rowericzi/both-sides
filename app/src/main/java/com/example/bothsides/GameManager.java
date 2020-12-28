@@ -18,10 +18,11 @@ public class GameManager extends Thread {
 	private final RelativeLayout imgHolder;
 	private final ArrayList<ImageView> imgList = new ArrayList<>();
 	private final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(128,128);
-	private ArrayList<Integer> timestamps = new ArrayList<>();
+	private final ArrayList<Integer> timestamps = new ArrayList<>();
 
 	@Override
 	public void run() {
+		//for each timestamp, schedule the animation
 		for (int timestamp : timestamps) {
 			TimerTask addImageTimerTask = new TimerTask() {
 				@Override
@@ -44,6 +45,7 @@ public class GameManager extends Thread {
 	}
 
 	private void addImageAndStartAnimation() {
+		//create new image and add it to the screen
 		imgList.add(new ImageView(context));
 		final int currentElem = imgList.size() - 1;
 		imgList.get(currentElem).setLayoutParams(params);
@@ -54,6 +56,7 @@ public class GameManager extends Thread {
 				imgHolder.addView(imgList.get(currentElem));
 			}
 		});
+		//create animation
 		Animation animate = new TranslateAnimation(0, 0, -128, imgHolder.getMeasuredHeight() - 128);
 		animate.setInterpolator(new LinearInterpolator());
 		animate.setDuration(1500);

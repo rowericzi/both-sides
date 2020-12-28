@@ -4,33 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SingleLevel">
 
-    <Button
-        android:id="@+id/start_single_level"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:onClick="startSingleLevel"
-        android:text="@string/start_single_level"
-        app:layout_constraintBottom_toTopOf="@+id/start_double_level"
+    <RelativeLayout
+        android:id="@+id/img_view_single"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal|top"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/input_single"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/start_double_level"
+        android:id="@+id/input_single"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="60dp"
-        android:onClick="startDoubleLevel"
-        android:text="@string/start_double_level"
+        android:layout_marginBottom="32dp"
+        android:onClick="userInput"
+        android:text="@string/click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
