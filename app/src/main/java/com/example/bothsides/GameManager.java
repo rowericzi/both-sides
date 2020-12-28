@@ -2,6 +2,7 @@ package com.example.bothsides;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -36,12 +37,17 @@ public class GameManager extends Thread {
 	}
 
 	public GameManager(Context context, RelativeLayout imgHolder) {
+		Intent intent = ((Activity) context).getIntent();
+		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
+		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 10);
+		double[] rhythm = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM);
 		this.context = context;
 		this.imgHolder = imgHolder;
-		timestamps.add(1000);
-		timestamps.add(2000);
-		timestamps.add(3000);
-		timestamps.add(4000);
+		for (int i = 0; i < measures; i++){
+			for ( double note : rhythm ){
+				timestamps.add((int) Math.round(60000*(note + 4 * i )/tempo + 1000));
+			}
+		}
 	}
 
 	private void addImageAndStartAnimation() {
