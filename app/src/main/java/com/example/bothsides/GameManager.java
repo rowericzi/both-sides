@@ -25,9 +25,10 @@ public class GameManager extends Thread {
 	private final ArrayList<Integer> timestamps = new ArrayList<>();
 	private final ArrayList<Integer> userInputTimestamps = new ArrayList<>();
 	private Long startTime;
-	//this is global, so it can be accessed by cancelGame();
+	//these are global, so they can be accessed by cancelGame();
 	private final Timer endGameTimer = new Timer();
 	private final Timer metronomeTimer = new Timer();
+
 	private final double tempo;
 	private boolean activateMetronome = false;
 	private MediaPlayer metronome;
