@@ -22,16 +22,19 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 
 		Intent intent = getIntent();
 		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
-		int measures1 = intent.getIntExtra(MainActivity.EXTRA_MEASURES_1, 10);
+		int metre = intent.getIntExtra(MainActivity.EXTRA_METRE, 4);
+		int repetitions1 = intent.getIntExtra(MainActivity.EXTRA_REPETITIONS_1, 10);
+		int repetitions2 = intent.getIntExtra(MainActivity.EXTRA_REPETITIONS_2, 10);
 		double[] rhythm1 = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_1);
-		int measures2 = intent.getIntExtra(MainActivity.EXTRA_MEASURES_2, 10);
 		double[] rhythm2 = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_2);
+		double patternLength1 = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_1, 4.0);
+		double patternLength2 = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_2, 4.0);
 
 		RelativeLayout imgHolder1 = (RelativeLayout) findViewById(R.id.img_view_double_1);
 		RelativeLayout imgHolder2 = (RelativeLayout) findViewById(R.id.img_view_double_2);
 
-		gm1 = new GameManager(this, imgHolder1, tempo, measures1, rhythm1, true);
-		gm2 = new GameManager(this, imgHolder2, tempo, measures2, rhythm2);
+		gm1 = new GameManager(this, imgHolder1, tempo, metre, repetitions1, rhythm1, patternLength1, true);
+		gm2 = new GameManager(this, imgHolder2, tempo, metre, repetitions2, rhythm2, patternLength2);
 		gm1.start();
 		gm2.start();
 	}

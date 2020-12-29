@@ -55,7 +55,7 @@ public class GameManager extends Thread {
 					metronome.start();
 				}
 			};
-			metronomeTimer.schedule(metronomeTimerTask, INITIAL_DELAY + ANIMATION_DURATION, Math.round(60000/tempo));
+			metronomeTimer.schedule(metronomeTimerTask, INITIAL_DELAY, Math.round(60000/tempo));
 		}
 
 		TimerTask endGameTimerTask = new TimerTask() {
@@ -67,18 +67,14 @@ public class GameManager extends Thread {
 		endGameTimer.schedule(endGameTimerTask, timestamps.get(timestamps.size()-1)+2000);
 	}
 
-	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int measures, double[] rhythm) {
+	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int metre, int repetitions, double[] rhythm, double patternLength) {
 		this.context = context;
 		this.imgHolder = imgHolder;
 		this.tempo = tempo;
-		for (int i = 0; i < measures; i++){
-			for ( double note : rhythm ){
-				timestamps.add((int) Math.round(60000*(note + 4 * i )/tempo + INITIAL_DELAY));
-			}
-		}
+		InitTimestamps(tempo, metre, repetitions, rhythm, patternLength);
 	}
 
-	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int measures, double[] rhythm, boolean activateMetronome) {
+	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int metre, int repetitions, double[] rhythm, double patternLength, boolean activateMetronome) {
 		this.context = context;
 		this.imgHolder = imgHolder;
 		this.tempo = tempo;
@@ -86,9 +82,13 @@ public class GameManager extends Thread {
 			this.activateMetronome = activateMetronome;
 			metronome = MediaPlayer.create(context, R.raw.metronome);
 		}
-		for (int i = 0; i < measures; i++){
+		InitTimestamps(tempo, metre, repetitions, rhythm, patternLength);
+	}
+
+	private void InitTimestamps(double tempo, int metre, int repetitions, double[] rhythm, double patternLength) {
+		for (int i = 0; i < repetitions; i++){
 			for ( double note : rhythm ){
-				timestamps.add((int) Math.round(60000*(note + 4 * i )/tempo + INITIAL_DELAY));
+				timestamps.add((int) Math.round(60000*(metre + note + patternLength * i )/tempo + INITIAL_DELAY - ANIMATION_DURATION));
 			}
 		}
 	}
