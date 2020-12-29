@@ -2,12 +2,15 @@ package com.example.bothsides;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SingleLevel extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class SingleLevel extends AppCompatActivity implements Level{
 	private GameManager gm;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,15 @@ public class SingleLevel extends AppCompatActivity {
 		gm.start();
 	}
 
-	public void userInput(View view) { // button onClick function
-		//gm.handleUserInput(); // not implemented yet
+	public void userInput(View view) {
+		gm.processUserInput();
+	}
+
+	@Override
+	public void endGame(ArrayList<Integer> expectedTimestamps, ArrayList<Integer> userInputTimestamps) {
+		Log.d("endgame", "gra skonczona ecks dee");
+
+		Intent intent = new Intent(this, EndGameActivity.class);
+		startActivity(intent);
 	}
 }

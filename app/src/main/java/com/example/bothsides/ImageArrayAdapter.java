@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class ImageArrayAdapter extends ArrayAdapter {
-	private class ViewHolder {
+	private static class ViewHolder {
 		ImageView image;
 		TextView text;
 	}

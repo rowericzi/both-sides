@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -14,14 +15,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameManager extends Thread {
+	private final static int ANIMATION_DURATION = 1500;
 	private final Context context;
 	private final RelativeLayout imgHolder;
 	private final ArrayList<ImageView> imgList = new ArrayList<>();
 	private final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(128,128);
 	private final ArrayList<Integer> timestamps = new ArrayList<>();
+	private final ArrayList<Integer> userInputTimestamps = new ArrayList<>();
+	private Long startTime;
 
 	@Override
 	public void run() {
+		startTime = System.nanoTime();
 		//for each timestamp, schedule the animation
 		for (int timestamp : timestamps) {
 			TimerTask addImageTimerTask = new TimerTask() {
@@ -32,7 +37,17 @@ public class GameManager extends Thread {
 			};
 			Timer addImageTimer = new Timer();
 			addImageTimer.schedule(addImageTimerTask, timestamp);
+
 		}
+
+		TimerTask endGameTimerTask = new TimerTask() {
+			@Override
+			public void run() {
+				((Level) context).endGame(timestamps, userInputTimestamps);
+			}
+		};
+		Timer endGameTimer = new Timer();
+		endGameTimer.schedule(endGameTimerTask, timestamps.get(timestamps.size()-1)+2000);
 	}
 
 	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int measures, double[] rhythm) {
@@ -60,7 +75,7 @@ public class GameManager extends Thread {
 		//create animation
 		Animation animate = new TranslateAnimation(0, 0, -128, imgHolder.getMeasuredHeight() - 128);
 		animate.setInterpolator(new LinearInterpolator());
-		animate.setDuration(1500);
+		animate.setDuration(ANIMATION_DURATION);
 		animate.setAnimationListener(new Animation.AnimationListener() {
 			@Override
 			public void onAnimationStart(Animation animation) {
@@ -78,5 +93,9 @@ public class GameManager extends Thread {
 			}
 		});
 		imgList.get(currentElem).startAnimation(animate);
+	}
+
+	public void processUserInput() {
+		userInputTimestamps.add((int) (System.nanoTime() - startTime)/1000000);
 	}
 }

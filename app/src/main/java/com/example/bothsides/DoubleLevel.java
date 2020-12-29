@@ -2,12 +2,15 @@ package com.example.bothsides;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DoubleLevel extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class DoubleLevel extends AppCompatActivity implements Level{
 	private GameManager gm1;
 	private GameManager gm2;
 	@Override
@@ -31,10 +34,19 @@ public class DoubleLevel extends AppCompatActivity {
 		gm2.start();
 	}
 
-	public void userInput1(View view) { // button onClick function
-		//gm.handleUserInput(); // not implemented yet
+	public void userInput1(View view) {
+		gm1.processUserInput();
 	}
 
 	public void userInput2(View view) {
+		gm2.processUserInput();
+	}
+
+	@Override
+	public void endGame(ArrayList<Integer> expectedTimestamps, ArrayList<Integer> userInputTimestamps) {
+		Log.d("endgame", "gra skonczona ecks dee");
+
+		Intent intent = new Intent(this, EndGameActivity.class);
+		startActivity(intent);
 	}
 }
