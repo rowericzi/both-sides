@@ -2,11 +2,12 @@ package com.example.bothsides;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -16,6 +17,7 @@ import java.util.TimerTask;
 
 public class GameManager extends Thread {
 	private final static int ANIMATION_DURATION = 1500;
+	private final static int INITIAL_DELAY = 1000;
 	private final Context context;
 	private final RelativeLayout imgHolder;
 	private final ArrayList<ImageView> imgList = new ArrayList<>();
@@ -23,6 +25,12 @@ public class GameManager extends Thread {
 	private final ArrayList<Integer> timestamps = new ArrayList<>();
 	private final ArrayList<Integer> userInputTimestamps = new ArrayList<>();
 	private Long startTime;
+	//this is global, so it can be accessed by cancelGame();
+	private final Timer endGameTimer = new Timer();
+	private final Timer metronomeTimer = new Timer();
+	private final double tempo;
+	private boolean activateMetronome = false;
+	private MediaPlayer metronome;
 
 	@Override
 	public void run() {
@@ -40,22 +48,47 @@ public class GameManager extends Thread {
 
 		}
 
+		if (activateMetronome) {
+			TimerTask metronomeTimerTask = new TimerTask() {
+				@Override
+				public void run() {
+					metronome.start();
+				}
+			};
+			metronomeTimer.schedule(metronomeTimerTask, INITIAL_DELAY + ANIMATION_DURATION, Math.round(60000/tempo));
+		}
+
 		TimerTask endGameTimerTask = new TimerTask() {
 			@Override
 			public void run() {
-				((Level) context).endGame(timestamps, userInputTimestamps);
+				endGame();
 			}
 		};
-		Timer endGameTimer = new Timer();
 		endGameTimer.schedule(endGameTimerTask, timestamps.get(timestamps.size()-1)+2000);
 	}
 
 	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int measures, double[] rhythm) {
 		this.context = context;
 		this.imgHolder = imgHolder;
+		this.tempo = tempo;
 		for (int i = 0; i < measures; i++){
 			for ( double note : rhythm ){
-				timestamps.add((int) Math.round(60000*(note + 4 * i )/tempo + 1000));
+				timestamps.add((int) Math.round(60000*(note + 4 * i )/tempo + INITIAL_DELAY));
+			}
+		}
+	}
+
+	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int measures, double[] rhythm, boolean activateMetronome) {
+		this.context = context;
+		this.imgHolder = imgHolder;
+		this.tempo = tempo;
+		if (activateMetronome) {
+			this.activateMetronome = activateMetronome;
+			metronome = MediaPlayer.create(context, R.raw.metronome);
+		}
+		for (int i = 0; i < measures; i++){
+			for ( double note : rhythm ){
+				timestamps.add((int) Math.round(60000*(note + 4 * i )/tempo + INITIAL_DELAY));
 			}
 		}
 	}
@@ -97,5 +130,19 @@ public class GameManager extends Thread {
 
 	public void processUserInput() {
 		userInputTimestamps.add((int) (System.nanoTime() - startTime)/1000000);
+	}
+
+	public void endGame() {
+		((Level) context).endGame(this, 2137.0);
+		metronomeTimer.cancel();
+		metronomeTimer.purge();
+	}
+
+	public void cancelGame() {
+		endGameTimer.cancel();
+		endGameTimer.purge();
+		metronomeTimer.cancel();
+		metronomeTimer.purge();
+		Log.d("GameManager", "Game cancelled!");
 	}
 }

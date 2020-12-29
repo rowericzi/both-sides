@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
 	public static final String EXTRA_MEASURES_2 = "com.example.bothsides.MEASURES_2";
 	public static final String EXTRA_RHYTHM_2 = "com.example.bothsides.RHYTHM_2";
+
+	public static final String EXTRA_RESULT_1 = "com.example.bothsides.RESULTS_1";
+	public static final String EXTRA_RESULT_2 = "com.example.bothsides.RESULTS_2";
+	public static final String EXTRA_HAS_RESULT_2 = "com.example.bothsides.HAS_RESULTS_2";
+
 	Spinner spinner;
 	String[] listItems = {"item 1", "item 2 ", "item 3", "item 4", "item 2137"};
 	int[] listImages = {
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 		Intent intent = new Intent(this, SingleLevel.class);
 		//using hard-coded values for now
 		intent.putExtra(EXTRA_TEMPO, 90.0);
-		intent.putExtra(EXTRA_MEASURES_1, 2);
+		intent.putExtra(EXTRA_MEASURES_1, 1);
 		intent.putExtra(EXTRA_RHYTHM_1, new double[]{0.0, 0.5, 1.0, 2.0, 3.0, 3.25, 3.5, 3.75});
 		startActivity(intent);
 	}
@@ -45,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 	public void startDoubleLevel(View view) {
 		Intent intent = new Intent(this, DoubleLevel.class);
 		intent.putExtra(EXTRA_TEMPO, 90.0);
-		intent.putExtra(EXTRA_MEASURES_1, 2);
+		intent.putExtra(EXTRA_MEASURES_1, 1);
 		intent.putExtra(EXTRA_RHYTHM_1, new double[]{0.0, 0.5, 1.0, 2.0, 3.0, 3.25, 3.5, 3.75});
-		intent.putExtra(EXTRA_MEASURES_2, 2);
+		intent.putExtra(EXTRA_MEASURES_2, 1);
 		intent.putExtra(EXTRA_RHYTHM_2, new double[]{0.0, 1.0, 4.0/3, 3.5});
 		startActivity(intent);
 	}

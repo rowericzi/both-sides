@@ -1,20 +1,42 @@
 package com.example.bothsides;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EndGameActivity extends AppCompatActivity {
-	private double result;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_end_game);
 
+		TextView textView = (TextView) findViewById(R.id.textView);
+		String resultStr = "";
+		Intent intent = getIntent();
+		double result1 = intent.getDoubleExtra(MainActivity.EXTRA_RESULT_1, 1.0);
 
+
+		if (intent.getBooleanExtra(MainActivity.EXTRA_HAS_RESULT_2, false)) {
+			resultStr += "Left hand result: ";
+			resultStr += String.valueOf(result1);
+			double result2 = intent.getDoubleExtra(MainActivity.EXTRA_RESULT_2, 1.0);
+			resultStr += "\nRight hand result: ";
+			resultStr += String.valueOf(result2);
+		} else {
+			resultStr += "Result: ";
+			resultStr += String.valueOf(result1);
+		}
+		textView.setText(resultStr);
+	}
+
+	@Override
+	protected void onDestroy() {
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+		super.onDestroy();
 	}
 
 	public void returnToMainMenu(View view) {

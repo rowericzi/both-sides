@@ -24,7 +24,7 @@ public class SingleLevel extends AppCompatActivity implements Level{
 
 		RelativeLayout imgHolder = (RelativeLayout) findViewById(R.id.img_view_single);
 
-		gm = new GameManager(this, imgHolder, tempo, measures, rhythm);
+		gm = new GameManager(this, imgHolder, tempo, measures, rhythm, true);
 		gm.start();
 	}
 
@@ -33,10 +33,17 @@ public class SingleLevel extends AppCompatActivity implements Level{
 	}
 
 	@Override
-	public void endGame(ArrayList<Integer> expectedTimestamps, ArrayList<Integer> userInputTimestamps) {
-		Log.d("endgame", "gra skonczona ecks dee");
+	protected void onDestroy() {
+		super.onDestroy();
+		gm.cancelGame();
+	}
 
+	@Override
+	public void endGame(GameManager gameManager, double result) {
+		Log.d("SingleLevel", "gm finished");
 		Intent intent = new Intent(this, EndGameActivity.class);
+		intent.putExtra(MainActivity.EXTRA_RESULT_1, result);
 		startActivity(intent);
+
 	}
 }

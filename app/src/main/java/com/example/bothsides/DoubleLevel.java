@@ -8,11 +8,13 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 public class DoubleLevel extends AppCompatActivity implements Level{
 	private GameManager gm1;
 	private GameManager gm2;
+	private double gm1_result;
+	private double gm2_result;
+	private boolean gm1_finished = false;
+	private boolean gm2_finished = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,7 +30,7 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 		RelativeLayout imgHolder1 = (RelativeLayout) findViewById(R.id.img_view_double_1);
 		RelativeLayout imgHolder2 = (RelativeLayout) findViewById(R.id.img_view_double_2);
 
-		gm1 = new GameManager(this, imgHolder1, tempo, measures1, rhythm1);
+		gm1 = new GameManager(this, imgHolder1, tempo, measures1, rhythm1, true);
 		gm2 = new GameManager(this, imgHolder2, tempo, measures2, rhythm2);
 		gm1.start();
 		gm2.start();
@@ -43,10 +45,35 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 	}
 
 	@Override
-	public void endGame(ArrayList<Integer> expectedTimestamps, ArrayList<Integer> userInputTimestamps) {
-		Log.d("endgame", "gra skonczona ecks dee");
+	public void endGame(GameManager gameManager, double result) {
+		if (gameManager == gm1) {
+			gm1_result = result;
+			gm1_finished = true;
+			Log.d("DoubleLevel", "gm1 finished");
+		} else {
+			gm2_result = result;
+			gm2_finished = true;
+			Log.d("DoubleLevel", "gm2 finished");
 
+		}
+		if (gm1_finished && gm2_finished) {
+			switchToEndGameActivity();
+		}
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		gm1.cancelGame();
+		gm2.cancelGame();
+	}
+
+	public void switchToEndGameActivity () {
 		Intent intent = new Intent(this, EndGameActivity.class);
+		intent.putExtra(MainActivity.EXTRA_RESULT_1, gm1_result);
+		intent.putExtra(MainActivity.EXTRA_RESULT_2, gm2_result);
+		intent.putExtra(MainActivity.EXTRA_HAS_RESULT_2, true);
 		startActivity(intent);
 	}
 }
