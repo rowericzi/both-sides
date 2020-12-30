@@ -24,6 +24,7 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
 		int metre = intent.getIntExtra(MainActivity.EXTRA_METRE, 4);
 		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 4);
+		boolean metronome = intent.getBooleanExtra(MainActivity.EXTRA_METRONOME_ENABLED, true);
 		double[] rhythm1 = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_1);
 		double[] rhythm2 = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_2);
 		double patternLength1 = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_1, 4.0);
@@ -32,7 +33,7 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 		RelativeLayout imgHolder1 = (RelativeLayout) findViewById(R.id.img_view_double_1);
 		RelativeLayout imgHolder2 = (RelativeLayout) findViewById(R.id.img_view_double_2);
 
-		gm1 = new GameManager(this, imgHolder1, tempo, metre, measures, rhythm1, patternLength1, true);
+		gm1 = new GameManager(this, imgHolder1, tempo, metre, measures, rhythm1, patternLength1, metronome);
 		gm2 = new GameManager(this, imgHolder2, tempo, metre, measures, rhythm2, patternLength2);
 		gm1.start();
 		gm2.start();

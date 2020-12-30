@@ -7,7 +7,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity{
 	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
 	public static final String EXTRA_METRE = "com.example.bothsides.METRE";
 	public static final String EXTRA_MEASURES = "com.example.bothsides.MEASURES";
+	public static final String EXTRA_METRONOME_ENABLED = "com.example.bothsides.METRONOME_ENABLED";
 	//values for individual rhythm tracks
 	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
 	public static final String EXTRA_RHYTHM_2 = "com.example.bothsides.RHYTHM_2";
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity{
 	private final ArrayList<RhythmPattern> rhythmPatternList = new ArrayList<>();
 	private RhythmPattern chosenRhythmPattern1;
 	private RhythmPattern chosenRhythmPattern2;
+	private Switch metronomeSwitch;
+	NumberPicker measuresPicker;
+	NumberPicker tempoPicker;
+	NumberPicker meterPicker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,8 @@ public class MainActivity extends AppCompatActivity{
 
 			}
 		});
+
+		metronomeSwitch = (Switch) findViewById(R.id.metronomeSwitch);
 	}
 
 	public void startSingleLevel(View view) {
@@ -92,6 +101,7 @@ public class MainActivity extends AppCompatActivity{
 		intent.putExtra(EXTRA_TEMPO, 60.0);
 		intent.putExtra(EXTRA_METRE, 4);
 		intent.putExtra(EXTRA_MEASURES, 4);
+		intent.putExtra(EXTRA_METRONOME_ENABLED, metronomeSwitch.isChecked());
 		intent.putExtra(EXTRA_RHYTHM_1, chosenRhythmPattern1.pattern);
 		intent.putExtra(EXTRA_PATTERN_LENGTH_1, chosenRhythmPattern1.patternLength);
 		startActivity(intent);
@@ -102,6 +112,7 @@ public class MainActivity extends AppCompatActivity{
 		intent.putExtra(EXTRA_TEMPO, 60.0);
 		intent.putExtra(EXTRA_METRE, 4);
 		intent.putExtra(EXTRA_MEASURES, 4);
+		intent.putExtra(EXTRA_METRONOME_ENABLED, metronomeSwitch.isChecked());
 		intent.putExtra(EXTRA_RHYTHM_1, chosenRhythmPattern1.pattern);
 		intent.putExtra(EXTRA_RHYTHM_2, chosenRhythmPattern2.pattern);
 		intent.putExtra(EXTRA_PATTERN_LENGTH_1, chosenRhythmPattern1.patternLength);
@@ -124,5 +135,4 @@ public class MainActivity extends AppCompatActivity{
 		}
 		return new ImageArrayAdapter(this, listItems, listImages);
 	}
-
 }

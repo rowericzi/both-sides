@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
         android:onClick="startSingleLevel"
         android:text="@string/start_single_level"
         app:layout_constraintBottom_toTopOf="@+id/start_double_level"
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="32dp"
         android:onClick="startDoubleLevel"
         android:text="@string/start_double_level"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,7 +56,7 @@
         android:id="@+id/chooseRhythmTextView_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/choose_second_rhythm"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,5 +74,86 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/measuresTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/measures"
+        app:layout_constraintEnd_toEndOf="@+id/measuresEditNumber"
+        app:layout_constraintStart_toStartOf="@+id/measuresEditNumber"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+    <TextView
+        android:id="@+id/meterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/meter"
+        app:layout_constraintEnd_toEndOf="@+id/meterEditTumber"
+        app:layout_constraintStart_toStartOf="@+id/meterEditTumber"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+    <Switch
+        android:id="@+id/metronomeSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:checked="true"
+        android:showText="false"
+        android:switchTextAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="@string/metronome"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meterEditTumber" />
+
+    <EditText
+        android:id="@+id/measuresEditNumber"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="4"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/measuresTitle" />
+
+    <EditText
+        android:id="@+id/meterEditTumber"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="4"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meterTitle" />
+
+    <EditText
+        android:id="@+id/tempoEditNumber"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="120"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/meterEditTumber"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toEndOf="@+id/measuresEditNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tempoTitle" />
+
+    <TextView
+        android:id="@+id/tempoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/tempo"
+        app:layout_constraintEnd_toEndOf="@+id/tempoEditNumber"
+        app:layout_constraintStart_toStartOf="@+id/tempoEditNumber"
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

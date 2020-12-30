@@ -5,4 +5,8 @@
     <string name="click">Click</string>
     <string name="choose_second_rhythm">Choose second rhythm</string>
     <string name="choose_first_rhythm">Choose first rhythm</string>
+    <string name="measures">Measures</string>
+    <string name="meter">Meter</string>
+    <string name="metronome">Metronome</string>
+    <string name="tempo">Tempo</string>
 </resources>
