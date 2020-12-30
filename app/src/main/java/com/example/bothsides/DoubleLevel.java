@@ -21,8 +21,8 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 		setContentView(R.layout.activity_double_level);
 
 		Intent intent = getIntent();
-		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
-		int metre = intent.getIntExtra(MainActivity.EXTRA_METRE, 4);
+		int tempo = intent.getIntExtra(MainActivity.EXTRA_TEMPO, 120);
+		int metre = intent.getIntExtra(MainActivity.EXTRA_METER, 4);
 		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 4);
 		boolean metronome = intent.getBooleanExtra(MainActivity.EXTRA_METRONOME_ENABLED, true);
 		double[] rhythm1 = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_1);

@@ -1,6 +1,5 @@
 package com.example.bothsides;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
 	//values common for both rhythm tracks
 	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
-	public static final String EXTRA_METRE = "com.example.bothsides.METRE";
+	public static final String EXTRA_METER = "com.example.bothsides.METER";
 	public static final String EXTRA_MEASURES = "com.example.bothsides.MEASURES";
 	public static final String EXTRA_METRONOME_ENABLED = "com.example.bothsides.METRONOME_ENABLED";
 	//values for individual rhythm tracks
@@ -94,13 +93,29 @@ public class MainActivity extends AppCompatActivity{
 		});
 
 		metronomeSwitch = (Switch) findViewById(R.id.metronomeSwitch);
+		measuresPicker = (NumberPicker) findViewById(R.id.measuresEditNumber);
+		tempoPicker = (NumberPicker) findViewById(R.id.tempoEditNumber);
+		meterPicker = (NumberPicker) findViewById(R.id.meterEditTumber);
+
+		measuresPicker.setMinValue(1);
+		measuresPicker.setMaxValue(60);
+		measuresPicker.setValue(4);
+		measuresPicker.setWrapSelectorWheel(false);
+		tempoPicker.setMinValue(30);
+		tempoPicker.setMaxValue(120);
+		tempoPicker.setValue(80);
+		tempoPicker.setWrapSelectorWheel(false);
+		meterPicker.setMinValue(2);
+		meterPicker.setMaxValue(21);
+		meterPicker.setValue(4);
+		meterPicker.setWrapSelectorWheel(false);
 	}
 
 	public void startSingleLevel(View view) {
 		Intent intent = new Intent(this, SingleLevel.class);
-		intent.putExtra(EXTRA_TEMPO, 60.0);
-		intent.putExtra(EXTRA_METRE, 4);
-		intent.putExtra(EXTRA_MEASURES, 4);
+		intent.putExtra(EXTRA_TEMPO, tempoPicker.getValue());
+		intent.putExtra(EXTRA_METER, meterPicker.getValue());
+		intent.putExtra(EXTRA_MEASURES, measuresPicker.getValue());
 		intent.putExtra(EXTRA_METRONOME_ENABLED, metronomeSwitch.isChecked());
 		intent.putExtra(EXTRA_RHYTHM_1, chosenRhythmPattern1.pattern);
 		intent.putExtra(EXTRA_PATTERN_LENGTH_1, chosenRhythmPattern1.patternLength);
@@ -109,9 +124,9 @@ public class MainActivity extends AppCompatActivity{
 
 	public void startDoubleLevel(View view) {
 		Intent intent = new Intent(this, DoubleLevel.class);
-		intent.putExtra(EXTRA_TEMPO, 60.0);
-		intent.putExtra(EXTRA_METRE, 4);
-		intent.putExtra(EXTRA_MEASURES, 4);
+		intent.putExtra(EXTRA_TEMPO, tempoPicker.getValue());
+		intent.putExtra(EXTRA_METER, meterPicker.getValue());
+		intent.putExtra(EXTRA_MEASURES, measuresPicker.getValue());
 		intent.putExtra(EXTRA_METRONOME_ENABLED, metronomeSwitch.isChecked());
 		intent.putExtra(EXTRA_RHYTHM_1, chosenRhythmPattern1.pattern);
 		intent.putExtra(EXTRA_RHYTHM_2, chosenRhythmPattern2.pattern);

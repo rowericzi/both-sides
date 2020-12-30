@@ -109,38 +109,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/meterEditTumber" />
 
-    <EditText
+    <NumberPicker
         android:id="@+id/measuresEditNumber"
         android:layout_width="96dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="4"
-        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/measuresTitle" />
 
-    <EditText
+    <NumberPicker
         android:id="@+id/meterEditTumber"
         android:layout_width="96dp"
         android:layout_height="48dp"
         android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="4"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/meterTitle" />
 
-    <EditText
+    <NumberPicker
         android:id="@+id/tempoEditNumber"
         android:layout_width="96dp"
         android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="120"
-        android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/meterEditTumber"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toEndOf="@+id/measuresEditNumber"

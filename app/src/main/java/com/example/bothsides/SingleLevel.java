@@ -16,9 +16,9 @@ public class SingleLevel extends AppCompatActivity implements Level{
 		setContentView(R.layout.activity_single_level);
 
 		Intent intent = getIntent();
-		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
-		int metre = intent.getIntExtra(MainActivity.EXTRA_METRE, 4);
-		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 10);
+		int tempo = intent.getIntExtra(MainActivity.EXTRA_TEMPO, 120);
+		int metre = intent.getIntExtra(MainActivity.EXTRA_METER, 4);
+		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 4);
 		boolean metronome = intent.getBooleanExtra(MainActivity.EXTRA_METRONOME_ENABLED, true);
 		double[] rhythm = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_1);
 		double patternLength = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_1, 4.0);
