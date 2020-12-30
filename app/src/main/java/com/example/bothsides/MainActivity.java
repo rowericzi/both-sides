@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity{
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-		Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+		Spinner spinner1 = findViewById(R.id.spinner1);
 		spinner1.setDropDownWidth(metrics.widthPixels);
 		spinner1.setAdapter(adapter);
 		spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity{
 
 			}
 		});
-		Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+		Spinner spinner2 = findViewById(R.id.spinner2);
 		spinner2.setDropDownWidth(metrics.widthPixels);
 		spinner2.setAdapter(adapter);
 		spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -92,10 +92,10 @@ public class MainActivity extends AppCompatActivity{
 			}
 		});
 
-		metronomeSwitch = (Switch) findViewById(R.id.metronomeSwitch);
-		measuresPicker = (NumberPicker) findViewById(R.id.measuresEditNumber);
-		tempoPicker = (NumberPicker) findViewById(R.id.tempoEditNumber);
-		meterPicker = (NumberPicker) findViewById(R.id.meterEditTumber);
+		metronomeSwitch = findViewById(R.id.metronomeSwitch);
+		measuresPicker = findViewById(R.id.measuresEditNumber);
+		tempoPicker = findViewById(R.id.tempoEditNumber);
+		meterPicker = findViewById(R.id.meterEditTumber);
 
 		measuresPicker.setMinValue(1);
 		measuresPicker.setMaxValue(60);
@@ -137,14 +137,14 @@ public class MainActivity extends AppCompatActivity{
 	}
 
 	private void initializeRhythmPatternList() {
-		rhythmPatternList.add(new RhythmPattern("Half notes", R.drawable.papryka, 2.0, new double[]{0.0}));
-		rhythmPatternList.add(new RhythmPattern("Quarter notes", R.drawable.papryka, 1.0, new double[]{0.0}));
-		rhythmPatternList.add(new RhythmPattern("Eight notes", R.drawable.papryka, 0.5, new double[]{0.0}));
-		rhythmPatternList.add(new RhythmPattern("Eight note triplets", R.drawable.papryka, 1.0/3, new double[]{0.0}));
-		rhythmPatternList.add(new RhythmPattern("Quarter note quintuplets", R.drawable.papryka, 2.0/5, new double[]{0.0}));
-		rhythmPatternList.add(new RhythmPattern("Triplet swing", R.drawable.papryka, 2.0, new double[]{0.0, 1, 5.0/3}));
-		rhythmPatternList.add(new RhythmPattern("Quintuplet swing", R.drawable.papryka, 2.0, new double[]{0.0, 1, 8.0/5}));
-		rhythmPatternList.add(new RhythmPattern("Septuplet swing", R.drawable.papryka, 2.0, new double[]{0.0, 1, 11.0/7}));
+		rhythmPatternList.add(new RhythmPattern("Half notes", R.drawable.half_note, 2.0, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Quarter notes", R.drawable.quarter_note, 1.0, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Eight notes", R.drawable.eight_note, 0.5, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Eight note triplets", R.drawable.eight_note_triplets, 1.0/3, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Eight note quintuplets", R.drawable.eight_note_quintuplets, 2.0/5, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Triplet swing", R.drawable.triplet_swing, 2.0, new double[]{0.0, 1, 5.0/3}));
+		rhythmPatternList.add(new RhythmPattern("Quintuplet swing", R.drawable.quintuplet_swing, 2.0, new double[]{0.0, 1, 8.0/5}));
+		rhythmPatternList.add(new RhythmPattern("Septuplet swing", R.drawable.septuplet_swing, 2.0, new double[]{0.0, 1, 11.0/7}));
 	}
 
 	private ImageArrayAdapter initializeImageArrayAdapter() {
