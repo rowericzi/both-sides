@@ -9,4 +9,15 @@
     <string name="meter">Meter</string>
     <string name="metronome">Metronome</string>
     <string name="tempo">Tempo</string>
+    <string name="half_notes">Half notes</string>
+    <string name="quarter_notes">Quarter notes</string>
+    <string name="eight_notes">Eight notes</string>
+    <string name="eight_note_triplets">Eight note triplets</string>
+    <string name="eight_note_quintuplets">Eight note quintuplets</string>
+    <string name="triplet_swing">Triplet swing</string>
+    <string name="quintuplet_swing">Quintuplet swing</string>
+    <string name="septuplet_swing">Septuplet swing</string>
+    <string name="left_hand_result">\"Left hand result: \"</string>
+    <string name="right_hand_result">\"Right hand result: \"</string>
+    <string name="result">\"Result: \"</string>
 </resources>

@@ -104,7 +104,7 @@ public class GameManager extends Thread {
 		imgList.add(new ImageView(context));
 		final int currentElem = imgList.size() - 1;
 		imgList.get(currentElem).setLayoutParams(params);
-		imgList.get(currentElem).setImageResource(R.drawable.papryka);
+		imgList.get(currentElem).setImageResource(R.drawable.quarter_note);
 		((Activity) context).runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

@@ -20,13 +20,13 @@ public class EndGameActivity extends AppCompatActivity {
 
 
 		if (intent.getBooleanExtra(MainActivity.EXTRA_HAS_RESULT_2, false)) {
-			resultStr += "Left hand result: ";
+			resultStr += getString(R.string.left_hand_result);
 			resultStr += String.valueOf(result1);
 			double result2 = intent.getDoubleExtra(MainActivity.EXTRA_RESULT_2, 1.0);
-			resultStr += "\nRight hand result: ";
+			resultStr += "\n" + getString(R.string.right_hand_result);
 			resultStr += String.valueOf(result2);
 		} else {
-			resultStr += "Result: ";
+			resultStr += getString(R.string.result);
 			resultStr += String.valueOf(result1);
 		}
 		textView.setText(resultStr);
