@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EndGameActivity"></activity>
+        <activity android:name=".EndGameActivity" />
         <activity android:name=".DoubleLevel" />
         <activity android:name=".SingleLevel" />
         <activity android:name=".MainActivity">

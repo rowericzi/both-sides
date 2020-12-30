@@ -3,4 +3,6 @@
     <string name="start_single_level">Start single level</string>
     <string name="start_double_level">Start double level</string>
     <string name="click">Click</string>
+    <string name="choose_second_rhythm">Choose second rhythm</string>
+    <string name="choose_first_rhythm">Choose first rhythm</string>
 </resources>
