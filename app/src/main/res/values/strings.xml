@@ -17,7 +17,7 @@
     <string name="triplet_swing">Triplet swing</string>
     <string name="quintuplet_swing">Quintuplet swing</string>
     <string name="septuplet_swing">Septuplet swing</string>
-    <string name="left_hand_result">\"Left hand result: \"</string>
-    <string name="right_hand_result">\"Right hand result: \"</string>
-    <string name="result">\"Result: \"</string>
+    <string name="left_hand_score">Left hand score: </string>
+    <string name="right_hand_score">Right hand score: </string>
+    <string name="score">Score: </string>
 </resources>

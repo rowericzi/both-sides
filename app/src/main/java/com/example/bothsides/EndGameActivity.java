@@ -13,20 +13,20 @@ public class EndGameActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_end_game);
 
-		TextView textView = (TextView) findViewById(R.id.textView);
+		TextView textView = findViewById(R.id.textView);
 		String resultStr = "";
 		Intent intent = getIntent();
 		double result1 = intent.getDoubleExtra(MainActivity.EXTRA_RESULT_1, 1.0);
 
 
 		if (intent.getBooleanExtra(MainActivity.EXTRA_HAS_RESULT_2, false)) {
-			resultStr += getString(R.string.left_hand_result);
+			resultStr += getString(R.string.left_hand_score);
 			resultStr += String.valueOf(result1);
 			double result2 = intent.getDoubleExtra(MainActivity.EXTRA_RESULT_2, 1.0);
-			resultStr += "\n" + getString(R.string.right_hand_result);
+			resultStr += "\n" + getString(R.string.right_hand_score);
 			resultStr += String.valueOf(result2);
 		} else {
-			resultStr += getString(R.string.result);
+			resultStr += getString(R.string.score);
 			resultStr += String.valueOf(result1);
 		}
 		textView.setText(resultStr);
