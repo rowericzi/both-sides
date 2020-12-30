@@ -14,15 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
+	//values common for both rhythm tracks
 	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
 	public static final String EXTRA_METRE = "com.example.bothsides.METRE";
 	public static final String EXTRA_MEASURES = "com.example.bothsides.MEASURES";
-
+	//values for individual rhythm tracks
 	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
 	public static final String EXTRA_RHYTHM_2 = "com.example.bothsides.RHYTHM_2";
 	public static final String EXTRA_PATTERN_LENGTH_1 = "com.example.bothsides.PATTERN_LENGTH_1";
 	public static final String EXTRA_PATTERN_LENGTH_2 = "com.example.bothsides.PATTERN_LENGTH_2";
-
 	public static final String EXTRA_RESULT_1 = "com.example.bothsides.RESULTS_1";
 	public static final String EXTRA_RESULT_2 = "com.example.bothsides.RESULTS_2";
 	public static final String EXTRA_HAS_RESULT_2 = "com.example.bothsides.HAS_RESULTS_2";
@@ -40,13 +40,9 @@ public class MainActivity extends AppCompatActivity{
 			this.pattern = pattern;
 		}
 	}
-	ArrayList<RhythmPattern> rhythmPatternList = new ArrayList<>();
-
-	Context context = this;
-	Spinner spinner1;
-	Spinner spinner2;
-	RhythmPattern chosenRhythmPattern1;
-	RhythmPattern chosenRhythmPattern2;
+	private final ArrayList<RhythmPattern> rhythmPatternList = new ArrayList<>();
+	private RhythmPattern chosenRhythmPattern1;
+	private RhythmPattern chosenRhythmPattern2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-		spinner1 = (Spinner) findViewById(R.id.spinner1);
+		Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
 		spinner1.setDropDownWidth(metrics.widthPixels);
 		spinner1.setAdapter(adapter);
 		spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity{
 
 			}
 		});
-		spinner2 = (Spinner) findViewById(R.id.spinner2);
+		Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
 		spinner2.setDropDownWidth(metrics.widthPixels);
 		spinner2.setAdapter(adapter);
 		spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -93,7 +89,6 @@ public class MainActivity extends AppCompatActivity{
 
 	public void startSingleLevel(View view) {
 		Intent intent = new Intent(this, SingleLevel.class);
-		//using hard-coded values for now
 		intent.putExtra(EXTRA_TEMPO, 60.0);
 		intent.putExtra(EXTRA_METRE, 4);
 		intent.putExtra(EXTRA_MEASURES, 4);
