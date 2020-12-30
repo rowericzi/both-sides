@@ -16,9 +16,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity{
 	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
 	public static final String EXTRA_METRE = "com.example.bothsides.METRE";
+	public static final String EXTRA_MEASURES = "com.example.bothsides.MEASURES";
 
-	public static final String EXTRA_REPETITIONS_1 = "com.example.bothsides.REPETITIONS_1";
-	public static final String EXTRA_REPETITIONS_2 = "com.example.bothsides.REPETITIONS_2";
 	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
 	public static final String EXTRA_RHYTHM_2 = "com.example.bothsides.RHYTHM_2";
 	public static final String EXTRA_PATTERN_LENGTH_1 = "com.example.bothsides.PATTERN_LENGTH_1";
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
 		//using hard-coded values for now
 		intent.putExtra(EXTRA_TEMPO, 60.0);
 		intent.putExtra(EXTRA_METRE, 4);
-		intent.putExtra(EXTRA_REPETITIONS_1, 4);
+		intent.putExtra(EXTRA_MEASURES, 4);
 		intent.putExtra(EXTRA_RHYTHM_1, chosenRhythmPattern1.pattern);
 		intent.putExtra(EXTRA_PATTERN_LENGTH_1, chosenRhythmPattern1.patternLength);
 		startActivity(intent);
@@ -107,8 +106,7 @@ public class MainActivity extends AppCompatActivity{
 		Intent intent = new Intent(this, DoubleLevel.class);
 		intent.putExtra(EXTRA_TEMPO, 60.0);
 		intent.putExtra(EXTRA_METRE, 4);
-		intent.putExtra(EXTRA_REPETITIONS_1, 4);
-		intent.putExtra(EXTRA_REPETITIONS_2, 4);
+		intent.putExtra(EXTRA_MEASURES, 4);
 		intent.putExtra(EXTRA_RHYTHM_1, chosenRhythmPattern1.pattern);
 		intent.putExtra(EXTRA_RHYTHM_2, chosenRhythmPattern2.pattern);
 		intent.putExtra(EXTRA_PATTERN_LENGTH_1, chosenRhythmPattern1.patternLength);

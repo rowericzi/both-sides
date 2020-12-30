@@ -18,13 +18,13 @@ public class SingleLevel extends AppCompatActivity implements Level{
 		Intent intent = getIntent();
 		double tempo = intent.getDoubleExtra(MainActivity.EXTRA_TEMPO, 120.0);
 		int metre = intent.getIntExtra(MainActivity.EXTRA_METRE, 4);
-		int repetitions = intent.getIntExtra(MainActivity.EXTRA_REPETITIONS_1, 10);
+		int measures = intent.getIntExtra(MainActivity.EXTRA_MEASURES, 10);
 		double[] rhythm = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_1);
 		double patternLength = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_1, 4.0);
 
 		RelativeLayout imgHolder = (RelativeLayout) findViewById(R.id.img_view_single);
 
-		gm = new GameManager(this, imgHolder, tempo, metre, repetitions, rhythm, patternLength, true);
+		gm = new GameManager(this, imgHolder, tempo, metre, measures, rhythm, patternLength, true);
 		gm.start();
 	}
 

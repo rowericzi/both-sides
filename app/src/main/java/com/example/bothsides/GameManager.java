@@ -70,14 +70,14 @@ public class GameManager extends Thread {
 		endGameTimer.schedule(endGameTimerTask, timestamps.get(timestamps.size()-1)+2000);
 	}
 
-	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int metre, int repetitions, double[] rhythm, double patternLength) {
+	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int metre, int measures, double[] rhythm, double patternLength) {
 		this.context = context;
 		this.imgHolder = imgHolder;
 		this.tempo = tempo;
-		InitTimestamps(tempo, metre, repetitions, rhythm, patternLength);
+		InitTimestamps(tempo, metre, measures, rhythm, patternLength);
 	}
 
-	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int metre, int repetitions, double[] rhythm, double patternLength, boolean activateMetronome) {
+	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int metre, int measures, double[] rhythm, double patternLength, boolean activateMetronome) {
 		this.context = context;
 		this.imgHolder = imgHolder;
 		this.tempo = tempo;
@@ -85,16 +85,18 @@ public class GameManager extends Thread {
 			this.activateMetronome = activateMetronome;
 			metronome = MediaPlayer.create(context, R.raw.metronome);
 		}
-		InitTimestamps(tempo, metre, repetitions, rhythm, patternLength);
+		InitTimestamps(tempo, metre, measures, rhythm, patternLength);
 	}
 
-	private void InitTimestamps(double tempo, int metre, int repetitions, double[] rhythm, double patternLength) {
+	private void InitTimestamps(double tempo, int metre, int measures, double[] rhythm, double patternLength) {
 		INITIAL_METRONOME_DURATION = (int) Math.round(60000*metre/tempo);
-		for (int i = 0; i < repetitions; i++){
+		int i = 0;
+		do {
 			for ( double note : rhythm ){
-				timestamps.add((int) Math.round(60000*(note + patternLength * i )/tempo + INITIAL_DELAY +INITIAL_METRONOME_DURATION - ANIMATION_DURATION));
+				timestamps.add((int) Math.round(60000*(note + patternLength * i )/tempo + INITIAL_DELAY + INITIAL_METRONOME_DURATION - ANIMATION_DURATION));
 			}
-		}
+			i++;
+		} while (timestamps.get(timestamps.size() - 1) < 60000*measures*metre/tempo + INITIAL_DELAY + INITIAL_METRONOME_DURATION - ANIMATION_DURATION);
 	}
 
 	private void addImageAndStartAnimation() {
