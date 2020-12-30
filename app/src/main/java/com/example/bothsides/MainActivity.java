@@ -137,8 +137,14 @@ public class MainActivity extends AppCompatActivity{
 	}
 
 	private void initializeRhythmPatternList() {
-		rhythmPatternList.add(new RhythmPattern("Eight notes", R.drawable.papryka, 0.5, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Half notes", R.drawable.papryka, 2.0, new double[]{0.0}));
 		rhythmPatternList.add(new RhythmPattern("Quarter notes", R.drawable.papryka, 1.0, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Eight notes", R.drawable.papryka, 0.5, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Eight note triplets", R.drawable.papryka, 1.0/3, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Quarter note quintuplets", R.drawable.papryka, 2.0/5, new double[]{0.0}));
+		rhythmPatternList.add(new RhythmPattern("Triplet swing", R.drawable.papryka, 2.0, new double[]{0.0, 1, 5.0/3}));
+		rhythmPatternList.add(new RhythmPattern("Quintuplet swing", R.drawable.papryka, 2.0, new double[]{0.0, 1, 8.0/5}));
+		rhythmPatternList.add(new RhythmPattern("Septuplet swing", R.drawable.papryka, 2.0, new double[]{0.0, 1, 11.0/7}));
 	}
 
 	private ImageArrayAdapter initializeImageArrayAdapter() {
