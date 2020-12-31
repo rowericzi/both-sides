@@ -7,7 +7,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * End game screen
+ * @author Ryszard Jezierski
+ */
 public class EndGameActivity extends AppCompatActivity {
+	/**
+	 * Displays results on the screen
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,6 +40,9 @@ public class EndGameActivity extends AppCompatActivity {
 		textView.setText(resultStr);
 	}
 
+	/**
+	 * Returns to {@link MainActivity} to prevent going back to (empty, finished) {@link Level}
+	 */
 	@Override
 	protected void onDestroy() {
 		Intent intent = new Intent(this, MainActivity.class);
@@ -39,6 +50,10 @@ public class EndGameActivity extends AppCompatActivity {
 		super.onDestroy();
 	}
 
+	/**
+	 * Returns to {@link MainActivity}
+	 * @param view this is an onClick function
+	 */
 	public void returnToMainMenu(View view) {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);

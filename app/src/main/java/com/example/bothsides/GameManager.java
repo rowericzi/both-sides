@@ -15,6 +15,14 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * The game engine, animating notes falling from the top of the screen and calculating
+ * player's score. It needs to be provided with a {@link RelativeLayout} used to store animated
+ * notes.
+ * The activity used to host the engine must implement the {@link Level} interface.
+ * @see Level
+ * @author Ryszard Jezierski
+ */
 public class GameManager extends Thread {
 	private final static int ANIMATION_DURATION = 1500;
 	private final static int INITIAL_DELAY = 1000;
@@ -35,6 +43,9 @@ public class GameManager extends Thread {
 	private boolean activateMetronome = false;
 	private MediaPlayer metronome;
 
+	/**
+	 * Start game
+	 */
 	@Override
 	public void run() {
 		startTime = System.nanoTime();
@@ -70,6 +81,16 @@ public class GameManager extends Thread {
 		endGameTimer.schedule(endGameTimerTask, timestamps.get(timestamps.size()-1)+2000);
 	}
 
+	/**
+	 * Class constructor
+	 * @param context Activity where the game is launched
+	 * @param imgHolder Container for animated images
+	 * @param tempo Game tempo in Beats Per Minute
+	 * @param meter Meter nominator (denominator is 4)
+	 * @param measures Number of measures to play
+	 * @param rhythm Array of "timestamps"; 1.0 = quarter note
+	 * @param patternLength Length of the pattern
+	 */
 	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int meter, int measures, double[] rhythm, double patternLength) {
 		this.context = context;
 		this.imgHolder = imgHolder;
@@ -77,6 +98,17 @@ public class GameManager extends Thread {
 		InitTimestamps(tempo, meter, measures, rhythm, patternLength);
 	}
 
+	/**
+	 * Class constructor allowing to activate metronome
+	 * @param context Activity where the game is launched
+	 * @param imgHolder Container for animated images
+	 * @param tempo Game tempo in Beats Per Minute
+	 * @param meter Meter nominator (denominator is 4)
+	 * @param measures Number of measures to play
+	 * @param rhythm Array of "timestamps"; 1.0 = quarter note
+	 * @param patternLength Length of the pattern
+	 * @param activateMetronome Whether the metronome should be activated or not
+	 */
 	public GameManager(Context context, RelativeLayout imgHolder, double tempo, int meter, int measures, double[] rhythm, double patternLength, boolean activateMetronome) {
 		this.context = context;
 		this.imgHolder = imgHolder;
@@ -134,11 +166,14 @@ public class GameManager extends Thread {
 		imgList.get(currentElem).startAnimation(animate);
 	}
 
+	/**
+	 * Call this method on user interaction
+	 */
 	public void processUserInput() {
 		userInputTimestamps.add(System.nanoTime());
 	}
 
-	public void endGame() {
+	private void endGame() {
 		metronomeTimer.cancel();
 		metronomeTimer.purge();
 		ArrayList<Integer> logTimestampsCorrected = new ArrayList<>();
@@ -190,6 +225,9 @@ public class GameManager extends Thread {
 		return 10 - (Math.sqrt(variance) + Math.abs(mean))*8/500;
 	}
 
+	/**
+	 * Cancels currently running game
+	 */
 	public void cancelGame() {
 		endGameTimer.cancel();
 		endGameTimer.purge();

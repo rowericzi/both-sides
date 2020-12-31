@@ -8,6 +8,11 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Double-track level, using two {@link GameManager} objects
+ * @see GameManager
+ * @author Ryszard Jezierski
+ */
 public class DoubleLevel extends AppCompatActivity implements Level{
 	private GameManager gm1;
 	private GameManager gm2;
@@ -15,6 +20,11 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 	private double gm2_result;
 	private boolean gm1_finished = false;
 	private boolean gm2_finished = false;
+
+	/**
+	 * Gets game parameters from {@link MainActivity} via an Intent and initializes two new {@link GameManager} objects
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,8 +40,8 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 		double patternLength1 = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_1, 4.0);
 		double patternLength2 = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_2, 4.0);
 
-		RelativeLayout imgHolder1 = (RelativeLayout) findViewById(R.id.img_view_double_1);
-		RelativeLayout imgHolder2 = (RelativeLayout) findViewById(R.id.img_view_double_2);
+		RelativeLayout imgHolder1 = findViewById(R.id.img_view_double_1);
+		RelativeLayout imgHolder2 = findViewById(R.id.img_view_double_2);
 
 		gm1 = new GameManager(this, imgHolder1, tempo, metre, measures, rhythm1, patternLength1, metronome);
 		gm2 = new GameManager(this, imgHolder2, tempo, metre, measures, rhythm2, patternLength2);
@@ -39,14 +49,27 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 		gm2.start();
 	}
 
+	/**
+	 * Button callback for the left track
+	 * @param view this is an onClick function
+	 */
 	public void userInput1(View view) {
 		gm1.processUserInput();
 	}
 
+	/**
+	 * Button callback for the right track
+	 * @param view this is an onClick function
+	 */
 	public void userInput2(View view) {
 		gm2.processUserInput();
 	}
 
+	/**
+	 * Callback for GameManager when the game ends
+	 * @param gameManager GameManager instance calling this method
+	 * @param result End score
+	 */
 	@Override
 	public void endGame(GameManager gameManager, double result) {
 		if (gameManager == gm1) {
@@ -65,6 +88,9 @@ public class DoubleLevel extends AppCompatActivity implements Level{
 
 	}
 
+	/**
+	 * Calls {@link GameManager#cancelGame()} to cancel currently running game when activity is destroyed
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

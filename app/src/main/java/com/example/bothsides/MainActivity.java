@@ -14,19 +14,57 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * Main menu of the game
+ * @author Ryszard Jezierski
+ */
 public class MainActivity extends AppCompatActivity{
 	//values common for both rhythm tracks
+	/**
+	 * Intent action used for setting/getting tempo
+	 */
 	public static final String EXTRA_TEMPO = "com.example.bothsides.TEMPO";
+	/**
+	 * Intent action used for setting/getting meter
+	 */
 	public static final String EXTRA_METER = "com.example.bothsides.METER";
+	/**
+	 * Intent action used for setting/getting measures
+	 */
 	public static final String EXTRA_MEASURES = "com.example.bothsides.MEASURES";
+	/**
+	 * Intent action used for setting/getting state of the metronome switch
+	 */
 	public static final String EXTRA_METRONOME_ENABLED = "com.example.bothsides.METRONOME_ENABLED";
+
 	//values for individual rhythm tracks
+	/**
+	 * Intent action used for setting/getting rhythm pattern for left track
+	 */
 	public static final String EXTRA_RHYTHM_1 = "com.example.bothsides.RHYTHM_1";
+	/**
+	 * Intent action used for setting/getting rhythm pattern for right track
+	 */
 	public static final String EXTRA_RHYTHM_2 = "com.example.bothsides.RHYTHM_2";
+	/**
+	 * Intent action used for setting/getting pattern length for left track
+	 */
 	public static final String EXTRA_PATTERN_LENGTH_1 = "com.example.bothsides.PATTERN_LENGTH_1";
+	/**
+	 * Intent action used for setting/getting pattern length for right track
+	 */
 	public static final String EXTRA_PATTERN_LENGTH_2 = "com.example.bothsides.PATTERN_LENGTH_2";
+	/**
+	 * Intent action used for setting/getting game results (score) for left track
+	 */
 	public static final String EXTRA_RESULT_1 = "com.example.bothsides.RESULTS_1";
+	/**
+	 * Intent action used for setting/getting game results (score) for right track
+	 */
 	public static final String EXTRA_RESULT_2 = "com.example.bothsides.RESULTS_2";
+	/**
+	 * Intent action used for setting/getting info whether the right track is activated
+	 */
 	public static final String EXTRA_HAS_RESULT_2 = "com.example.bothsides.HAS_RESULTS_2";
 
 	private static class RhythmPattern {
@@ -46,9 +84,9 @@ public class MainActivity extends AppCompatActivity{
 	private RhythmPattern chosenRhythmPattern1;
 	private RhythmPattern chosenRhythmPattern2;
 	private Switch metronomeSwitch;
-	NumberPicker measuresPicker;
-	NumberPicker tempoPicker;
-	NumberPicker meterPicker;
+	private NumberPicker measuresPicker;
+	private NumberPicker tempoPicker;
+	private NumberPicker meterPicker;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +149,10 @@ public class MainActivity extends AppCompatActivity{
 		meterPicker.setWrapSelectorWheel(false);
 	}
 
+	/**
+	 * Starts {@link SingleLevel}
+	 * @param view this is an onClick function
+	 */
 	public void startSingleLevel(View view) {
 		Intent intent = new Intent(this, SingleLevel.class);
 		intent.putExtra(EXTRA_TEMPO, tempoPicker.getValue());
@@ -122,6 +164,10 @@ public class MainActivity extends AppCompatActivity{
 		startActivity(intent);
 	}
 
+	/**
+	 * Starts {@link DoubleLevel}
+	 * @param view this is an onClick function
+	 */
 	public void startDoubleLevel(View view) {
 		Intent intent = new Intent(this, DoubleLevel.class);
 		intent.putExtra(EXTRA_TEMPO, tempoPicker.getValue());

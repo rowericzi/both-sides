@@ -8,8 +8,18 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Single-track level, using one {@link GameManager} object
+ * @see GameManager
+ * @author Ryszard Jezierski
+ */
 public class SingleLevel extends AppCompatActivity implements Level{
 	private GameManager gm;
+
+	/**
+	 * Gets game parameters from {@link MainActivity} via an Intent and initializes a new {@link GameManager}
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,22 +33,34 @@ public class SingleLevel extends AppCompatActivity implements Level{
 		double[] rhythm = intent.getDoubleArrayExtra(MainActivity.EXTRA_RHYTHM_1);
 		double patternLength = intent.getDoubleExtra(MainActivity.EXTRA_PATTERN_LENGTH_1, 4.0);
 
-		RelativeLayout imgHolder = (RelativeLayout) findViewById(R.id.img_view_single);
+		RelativeLayout imgHolder = findViewById(R.id.img_view_single);
 
 		gm = new GameManager(this, imgHolder, tempo, metre, measures, rhythm, patternLength, metronome);
 		gm.start();
 	}
 
+	/**
+	 * Button callback
+	 * @param view this is an onClick function
+	 */
 	public void userInput(View view) {
 		gm.processUserInput();
 	}
 
+	/**
+	 * Calls {@link GameManager#cancelGame()} to cancel currently running game when activity is destroyed
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		gm.cancelGame();
 	}
 
+	/**
+	 * Callback for GameManager when the game ends
+	 * @param gameManager GameManager instance calling this method
+	 * @param result End score
+	 */
 	@Override
 	public void endGame(GameManager gameManager, double result) {
 		Log.d("SingleLevel", "gm finished");
